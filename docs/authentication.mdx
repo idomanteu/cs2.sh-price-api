@@ -1,6 +1,5 @@
 ---
 title: Authentication
-description: Learn how to authenticate with the cs2.sh API using API keys. Generate keys from your dashboard and include them in request headers.
 ---
 
 <Callout type="info" title="Authentication Required">
@@ -41,10 +40,6 @@ Accept-Encoding: gzip
 
 Both `Authorization` and `Accept-Encoding` headers are required for all authenticated requests.
 
-<Callout type="warn" title="Security">
-Never commit API keys to version control. Store them in environment variables or a secrets manager.
-</Callout>
-
 ## Error Responses
 
 ### 401 Unauthorized
@@ -80,7 +75,8 @@ Upgrade your plan or wait until your quota resets on your billing date.
 
 ## Key Rotation
 
-Rotate your API key from the [dashboard](https://cs2.sh/dashboard). Rotating generates a new key and immediately invalidates the old one.
+Rotate your API key from the [dashboard](https://cs2.sh/dashboard).
+Rotating generates a new key and immediately invalidates the old one.
 
 ---
 

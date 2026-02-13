@@ -1,9 +1,14 @@
 ---
 title: Latest Prices
-description: Fetch real-time CS2 item prices from 6 marketplaces with the /v1/prices/latest endpoint. Filter by item name and source.
 ---
 
-Real-time prices across all 6 marketplaces. Available on all paid plans (Developer, Scale, Enterprise). Updated every 10 seconds.
+Real-time prices across all 6 marketplaces.
+Available on all paid plans (Developer, Scale, Enterprise).
+Updated every 10 seconds.
+
+BUFF, YouPin, and C5Game include both `ask` and `bid` prices.
+CSFloat, Skinport, and Steam are `ask`-only.
+Skinport additionally returns `max_ask`, `mean_ask`, `median_ask`, and rolling history objects.
 
 BUFF, YouPin, and C5Game include both ask and bid prices. CSFloat, Skinport, and Steam are ask-only. Skinport additionally returns `max_ask`, `mean_ask`, `median_ask`, and rolling history objects.
 

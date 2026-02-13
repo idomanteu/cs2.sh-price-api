@@ -1,9 +1,11 @@
 ---
 title: Price History
-description: Query historical OHLC price data for CS2 items with the /v1/prices/history endpoint. Daily and hourly candles with marketplace filtering.
 ---
 
-Historical OHLC (Open/High/Low/Close) prices across all 6 marketplaces. Available on Scale and Enterprise plans. Data from December 24th, 2025 onwards. Each candle records the first, highest, lowest, and last price observed in the interval.
+Historical OHLC (Open/High/Low/Close) prices across all 6 marketplaces.
+Available on Scale and Enterprise plans.
+Data from December 24th, 2025 onwards. Updates continuously with /prices/latest.
+Each candle records the first, highest, lowest, and last price observed in the interval.
 
 | Interval | Max Range |
 |----------|-----------|
@@ -368,12 +370,12 @@ Each time bucket contains per-source OHLC data:
 
 OHLC (Open/High/Low/Close) aggregation compresses raw price snapshots into candles at your chosen interval. Each candle tells you:
 
-- **Open** — the first price recorded when the interval started
-- **High** — the peak price during the interval
-- **Low** — the lowest price during the interval
-- **Close** — the last price recorded before the interval ended
+- **Open** - the first price recorded when the interval started
+- **High** - the peak price during the interval
+- **Low** - the lowest price during the interval
+- **Close** - the last price recorded before the interval ended
 
-This is useful because cs2.sh collects prices every ~3 minutes. Rather than working with thousands of raw snapshots, OHLC lets you see price movement across hours or days at a glance — spot trends, measure volatility, or compare sources over time.
+Rather than working with thousands of raw snapshots, OHLC lets you see price movement across various timeframes (5 minutes to 1 day).
 
 ---
 
