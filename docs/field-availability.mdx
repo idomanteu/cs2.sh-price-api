@@ -3,7 +3,7 @@ title: Marketplaces
 description: See which price fields like listing price, buy orders, and volume are available from each CS2 marketplace in the cs2.sh API.
 ---
 
-cs2.sh currently supports BUFF, YouPin, C5Game, CSFloat, Skinport, and Steam
+cs2.sh currently supports BUFF, YouPin, C5Game, CSFloat, Skinport, and Steam. All prices are normalized to USD.
 
 | Marketplace | ask | bid | ask_volume | bid_volume | Additional      |
 | ----------- | --- | --- | ---------- | ---------- | --------------- |
@@ -73,9 +73,74 @@ cs2.sh currently supports BUFF, YouPin, C5Game, CSFloat, Skinport, and Steam
   }}
 />
 
-<Callout type="info" title="Currency">
-All prices are normalized to USD.
-</Callout>
+---
+
+## Endpoint Notes
+
+### Latest Prices
+
+**Sources:** All 6 marketplaces — BUFF, YouPin, C5Game, CSFloat, Skinport, Steam.
+
+BUFF, YouPin, and C5Game include both ask (sell) and bid (buy) prices with volumes. CSFloat, Skinport, and Steam only have ask prices. Skinport additionally includes `max_ask`, `mean_ask`, `median_ask`, and rolling history objects (`24h_history`, `7d_history`, `30d_history`, `90d_history`).
+
+**Update frequency:** Cache refreshes every 10 seconds. Underlying marketplace data refreshed every ~3 minutes.
+
+### Price History
+
+**Sources:** All 6 marketplaces — BUFF, YouPin, C5Game, CSFloat, Skinport, Steam.
+
+Returns OHLC (Open/High/Low/Close) aggregated data. Each candle records the first, highest, lowest, and last price observed in the interval.
+
+**Intervals and maximum ranges:**
+
+| Interval | Max Range |
+|----------|-----------|
+| `5m` | 14 days |
+| `30m` | 90 days |
+| `1h` | 180 days |
+| `1d` | 365 days |
+
+**Data available from:** December 24th, 2025 onwards. For longer-term historical data, use [Archive History](/docs/api-reference/archive-history).
+
+### Archive History
+
+**Sources:** `aggregate` (default), `buff`, `youpin`, `c5game`.
+
+The `aggregate` source includes additional fields not available on individual sources: `hourly_volume` and `total_supply`.
+
+**Intervals:** `1h` (hourly), `1d` (daily, default).
+
+**Data range:** ~2-3 years depending on the item. Updates ~1-2 times per day. For recent high-resolution data, use [Price History](/docs/api-reference/prices-history).
+
+### Archive CSFloat
+
+**Source:** CSFloat only. Returns daily sale averages (not live listings).
+
+**Data range:** ~2-3 years depending on the item. Updates ~once per day.
+
+**Fields:** `date` (YYYY-MM-DD), `price` (average sale price USD), `volume` (number of sales that day).
+
+### Liquidity
+
+No source filtering — liquidity is computed across all marketplaces.
+
+**Liquidity rank scale (0-100):**
+- 95-100: Very high liquidity
+- 85-95: High liquidity
+- 70-85: Moderate liquidity
+- 60-70: Low liquidity
+- Below 60: Very low liquidity
+
+### Health
+
+Public endpoint — no authentication required.
+
+**Status thresholds per source:**
+- `up` — Data collected less than 10 minutes ago
+- `degraded` — Data collected 10 minutes to 1 hour ago
+- `down` — Data collected more than 1 hour ago
+
+Includes `stats` with `total_events`, `market_hash_names`, and `variant_items` counts.
 
 ---
 
@@ -88,5 +153,11 @@ All prices are normalized to USD.
   </Card>
   <Card href="/docs/api-reference/archive-history" title="Archive History">
     Get long-term historical archive prices
+  </Card>
+  <Card href="/docs/api-reference/liquidity" title="Liquidity">
+    Item liquidity rankings across marketplaces
+  </Card>
+  <Card href="/docs/api-reference/health" title="Health">
+    Service status and data freshness
   </Card>
 </Cards>

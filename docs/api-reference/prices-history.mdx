@@ -3,24 +3,7 @@ title: Price History
 description: Query historical OHLC price data for CS2 items with the /v1/prices/history endpoint. Daily and hourly candles with marketplace filtering.
 ---
 
-<Callout type="info" title="Available on Scale and Enterprise plans">
-  See [Plans](/docs/pricing) for details.
-</Callout>
-
-Returns historical prices with OHLC (Open/High/Low/Close) aggregation. Recommended for recent, high-resolution historical data.
-
-- **Open**: First price recorded in the interval
-- **High**: Highest price during the interval
-- **Low**: Lowest price during the interval
-- **Close**: Last price recorded in the interval
-
-Available data range: December 24th, 2025 onwards.
-
-<Callout type="info" title="Update Frequency">
-Updated continuously, at the same rate as [Latest](/docs/api-reference/prices-latest). For long-term historical data, use [Archive History](/docs/api-reference/archive-history) instead.
-</Callout>
-
-**Intervals and maximum ranges:**
+Historical OHLC prices across all 6 marketplaces. Available on Scale and Enterprise plans. Data from December 24th, 2025 onwards.
 
 | Interval | Max Range |
 |----------|-----------|
@@ -29,9 +12,7 @@ Updated continuously, at the same rate as [Latest](/docs/api-reference/prices-la
 | `1h` | 180 days |
 | `1d` | 365 days |
 
-<Callout type="info" title="Need More History?">
-For longer-term historical data, use [Archive History](/docs/api-reference/archive-history) instead.
-</Callout>
+For longer-term historical data, use [Archive History](/docs/api-reference/archive-history).
 
 ---
 
@@ -215,71 +196,6 @@ curl -X POST "https://api.cs2.sh/v1/prices/history" \ # [!code highlight]
   </Tab>
 </Tabs>
 
-### Response Fields
-
-Each time bucket contains per-source OHLC data:
-
-<TypeTable
-  type={{
-    bucket: {
-      type: "date-time",
-      description: "Start of the time interval",
-    },
-    "<source>.open_ask": {
-      type: "number",
-      description: "First ask price in the interval",
-    },
-    "<source>.high_ask": {
-      type: "number",
-      description: "Highest ask price in the interval",
-    },
-    "<source>.low_ask": {
-      type: "number",
-      description: "Lowest ask price in the interval",
-    },
-    "<source>.close_ask": {
-      type: "number",
-      description: "Last ask price in the interval",
-    },
-    "<source>.ask_volume": {
-      type: "integer",
-      description: "Ask volume at end of interval",
-    },
-    "<source>.open_bid": {
-      type: "number",
-      description: "First bid price in the interval",
-    },
-    "<source>.high_bid": {
-      type: "number",
-      description: "Highest bid price in the interval",
-    },
-    "<source>.low_bid": {
-      type: "number",
-      description: "Lowest bid price in the interval",
-    },
-    "<source>.close_bid": {
-      type: "number",
-      description: "Last bid price in the interval",
-    },
-    "<source>.bid_volume": {
-      type: "integer",
-      description: "Bid volume at end of interval",
-    },
-    "<source>.sample_count": {
-      type: "integer",
-      description: "Number of 5-minute samples aggregated",
-    },
-    "<source>.open_time": {
-      type: "date-time",
-      description: "Timestamp of first observation in the interval",
-    },
-    "<source>.close_time": {
-      type: "date-time",
-      description: "Timestamp of last observation in the interval",
-    },
-  }}
-/>
-
 ### Example Response
 
 <Accordions defaultValue="Example Response">
@@ -382,6 +298,71 @@ Each time bucket contains per-source OHLC data:
 </Accordions>
 
 For error responses, see [Errors & Limits](/docs/rate-limits).
+
+### Response Fields
+
+Each time bucket contains per-source OHLC data:
+
+<TypeTable
+  type={{
+    bucket: {
+      type: "date-time",
+      description: "Start of the time interval",
+    },
+    "<source>.open_ask": {
+      type: "number",
+      description: "First ask price in the interval",
+    },
+    "<source>.high_ask": {
+      type: "number",
+      description: "Highest ask price in the interval",
+    },
+    "<source>.low_ask": {
+      type: "number",
+      description: "Lowest ask price in the interval",
+    },
+    "<source>.close_ask": {
+      type: "number",
+      description: "Last ask price in the interval",
+    },
+    "<source>.ask_volume": {
+      type: "integer",
+      description: "Ask volume at end of interval",
+    },
+    "<source>.open_bid": {
+      type: "number",
+      description: "First bid price in the interval",
+    },
+    "<source>.high_bid": {
+      type: "number",
+      description: "Highest bid price in the interval",
+    },
+    "<source>.low_bid": {
+      type: "number",
+      description: "Lowest bid price in the interval",
+    },
+    "<source>.close_bid": {
+      type: "number",
+      description: "Last bid price in the interval",
+    },
+    "<source>.bid_volume": {
+      type: "integer",
+      description: "Bid volume at end of interval",
+    },
+    "<source>.sample_count": {
+      type: "integer",
+      description: "Number of 5-minute samples aggregated",
+    },
+    "<source>.open_time": {
+      type: "date-time",
+      description: "Timestamp of first observation in the interval",
+    },
+    "<source>.close_time": {
+      type: "date-time",
+      description: "Timestamp of last observation in the interval",
+    },
+  }}
+/>
 
 ---
 

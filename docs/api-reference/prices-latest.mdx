@@ -3,66 +3,13 @@ title: Latest Prices
 description: Fetch real-time CS2 item prices from 6 marketplaces with the /v1/prices/latest endpoint. Filter by item name and source.
 ---
 
-<Callout type="info" title="Available on all paid plans">
-  Developer, Scale, and Enterprise. See [Plans](/docs/pricing) for details.
-</Callout>
-
-Real-time prices across all 6 marketplaces (BUFF, YouPin, C5Game, CSFloat, Skinport, Steam). Use GET to fetch all items, or POST to request up to 100 specific items.
-
-<Callout type="info" title="Update Frequency">
-Updated every 10 seconds. Underlying data refreshed every ~3 minutes.
-</Callout>
-
-Each marketplace returns its own set of fields. BUFF, YouPin, and C5Game include both ask (sell) and bid (buy) prices. CSFloat, Skinport, and Steam only have ask prices. Skinport includes additional stats like median and mean prices.
-
-### Source Fields
-
-<TypeTable
-  type={{
-    updated_at: {
-      type: "date-time",
-      description: "Price last updated at marketplace (All sources)",
-    },
-    collected_at: {
-      type: "date-time",
-      description: "When cs2.sh collected this data (All sources)",
-    },
-    ask: {
-      type: "number",
-      description: "Lowest listing price in USD (All sources)",
-    },
-    ask_volume: {
-      type: "integer",
-      description: "Number of items listed for sale (All sources)",
-    },
-    bid: {
-      type: "number",
-      description: "Highest buy order in USD (BUFF, YouPin, C5Game)",
-    },
-    bid_volume: {
-      type: "integer",
-      description: "Number of active buy orders (BUFF, YouPin, C5Game)",
-    },
-    max_ask: {
-      type: "number",
-      description: "Highest listing price (Skinport)",
-    },
-    mean_ask: {
-      type: "number",
-      description: "Average listing price (Skinport)",
-    },
-    median_ask: {
-      type: "number",
-      description: "Median listing price (Skinport)",
-    },
-  }}
-/>
+Real-time prices across all 6 marketplaces. Available on all paid plans (Developer, Scale, Enterprise). Updated every 10 seconds.
 
 ---
 
 ## GET /v1/prices/latest
 
-Returns current prices for all items from all supported marketplaces. Includes variant prices. Available on all paid plans (Developer, Scale, and Enterprise).
+Returns current prices for all items from all supported marketplaces. Includes variant prices.
 
 ### Headers
 
@@ -542,6 +489,51 @@ Items not found are returned in the `errors` array:
 ```
 
 For error responses, see [Errors & Limits](/docs/rate-limits).
+
+## Response Fields
+
+Each source returns the fields available for that marketplace. See [Marketplaces](/docs/field-availability) for which fields each source includes.
+
+<TypeTable
+  type={{
+    updated_at: {
+      type: "date-time",
+      description: "Price last updated at marketplace (All sources)",
+    },
+    collected_at: {
+      type: "date-time",
+      description: "When cs2.sh collected this data (All sources)",
+    },
+    ask: {
+      type: "number",
+      description: "Lowest listing price in USD (All sources)",
+    },
+    ask_volume: {
+      type: "integer",
+      description: "Number of items listed for sale (All sources)",
+    },
+    bid: {
+      type: "number",
+      description: "Highest buy order in USD (BUFF, YouPin, C5Game)",
+    },
+    bid_volume: {
+      type: "integer",
+      description: "Number of active buy orders (BUFF, YouPin, C5Game)",
+    },
+    max_ask: {
+      type: "number",
+      description: "Highest listing price (Skinport)",
+    },
+    mean_ask: {
+      type: "number",
+      description: "Average listing price (Skinport)",
+    },
+    median_ask: {
+      type: "number",
+      description: "Median listing price (Skinport)",
+    },
+  }}
+/>
 
 ---
 

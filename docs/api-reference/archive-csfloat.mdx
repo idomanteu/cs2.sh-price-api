@@ -3,42 +3,13 @@ title: Archive CSFloat
 description: Access CSFloat historical sales records for CS2 items with the /v1/archive/csfloat endpoint. Individual sale prices, floats, and timestamps.
 ---
 
-<Callout type="info" title="Available on Scale and Enterprise plans">
-  See [Plans](/docs/pricing) for details.
-</Callout>
-
-CSFloat-specific daily sale averages. Supports variant items.
-
-Available data range: ~2-3 years, depending on the item.
-
-<Callout type="info" title="Update Frequency">
-Data updates ~once per day.
-</Callout>
-
-### Response Fields
-
-<TypeTable
-  type={{
-    date: {
-      type: "string",
-      description: "Date of the sales data (YYYY-MM-DD)",
-    },
-    price: {
-      type: "number",
-      description: "Average sale price across all sales that day (USD)",
-    },
-    volume: {
-      type: "integer",
-      description: "Total number of sales that day",
-    },
-  }}
-/>
+CSFloat daily sale averages. Available on Scale and Enterprise plans. Updates ~once per day.
 
 ---
 
 ## POST /v1/archive/csfloat
 
-Returns CSFloat daily sale history for up to 100 specific items. Available on Scale and Enterprise plans only.
+Returns CSFloat daily sale history for up to 100 specific items. Available data range: ~2-3 years depending on the item. Supports variant items.
 
 ### Headers
 
@@ -257,6 +228,25 @@ curl -X POST "https://api.cs2.sh/v1/archive/csfloat" \ # [!code highlight]
 ```
 
 For error responses, see [Errors & Limits](/docs/rate-limits).
+
+### Response Fields
+
+<TypeTable
+  type={{
+    date: {
+      type: "string",
+      description: "Date of the sales data (YYYY-MM-DD)",
+    },
+    price: {
+      type: "number",
+      description: "Average sale price across all sales that day (USD)",
+    },
+    volume: {
+      type: "integer",
+      description: "Total number of sales that day",
+    },
+  }}
+/>
 
 ---
 

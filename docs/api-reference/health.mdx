@@ -3,13 +3,13 @@ title: Health
 description: Check cs2.sh API health, data freshness, and marketplace collection status with the /health endpoint. No authentication required.
 ---
 
-<Callout type="info" title="Available on all plans (no authentication required)">
-  The health endpoint is public and free to use.
-</Callout>
+Public endpoint. No authentication required.
+
+---
 
 ## GET /health
 
-Returns service status and data freshness for each source. No authentication required.
+Returns service status and data freshness for each source.
 
 **Status values:**
 - `up` - Data collected less than 10 minutes ago
@@ -89,49 +89,6 @@ curl -X GET "https://api.cs2.sh/health" # [!code highlight]
   </Tab>
 </Tabs>
 
-### Response Fields
-
-<TypeTable
-  type={{
-    status: {
-      type: "string",
-      description: "Overall service status: up, degraded, or down",
-    },
-    last_refreshed_at: {
-      type: "date-time",
-      description: "When health data was last refreshed",
-    },
-    sources: {
-      type: "object",
-      description: "Status per data source (buff, youpin, csfloat, skinport, c5game, steam)",
-    },
-    "sources.<name>.updated_at": {
-      type: "date-time",
-      description: "When price was last updated at marketplace",
-    },
-    "sources.<name>.collected_at": {
-      type: "date-time",
-      description: "When cs2.sh collected this data",
-    },
-    "sources.<name>.status": {
-      type: "string",
-      description: "Source status: up, degraded, or down",
-    },
-    "stats.total_events": {
-      type: "integer",
-      description: "Total number of price events in database",
-    },
-    "stats.market_hash_names": {
-      type: "integer",
-      description: "Number of unique items tracked",
-    },
-    "stats.variant_items": {
-      type: "integer",
-      description: "Number of variant items tracked",
-    },
-  }}
-/>
-
 ### Example Response
 
 ```json title="Response"
@@ -177,6 +134,49 @@ curl -X GET "https://api.cs2.sh/health" # [!code highlight]
   }
 }
 ```
+
+### Response Fields
+
+<TypeTable
+  type={{
+    status: {
+      type: "string",
+      description: "Overall service status: up, degraded, or down",
+    },
+    last_refreshed_at: {
+      type: "date-time",
+      description: "When health data was last refreshed",
+    },
+    sources: {
+      type: "object",
+      description: "Status per data source (buff, youpin, csfloat, skinport, c5game, steam)",
+    },
+    "sources.<name>.updated_at": {
+      type: "date-time",
+      description: "When price was last updated at marketplace",
+    },
+    "sources.<name>.collected_at": {
+      type: "date-time",
+      description: "When cs2.sh collected this data",
+    },
+    "sources.<name>.status": {
+      type: "string",
+      description: "Source status: up, degraded, or down",
+    },
+    "stats.total_events": {
+      type: "integer",
+      description: "Total number of price events in database",
+    },
+    "stats.market_hash_names": {
+      type: "integer",
+      description: "Number of unique items tracked",
+    },
+    "stats.variant_items": {
+      type: "integer",
+      description: "Number of variant items tracked",
+    },
+  }}
+/>
 
 ---
 

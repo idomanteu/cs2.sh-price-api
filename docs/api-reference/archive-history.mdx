@@ -3,72 +3,17 @@ title: Archive History
 description: Query long-term CS2 pricing archives per marketplace with the /v1/archive/history endpoint. Multi-year historical price data.
 ---
 
-<Callout type="info" title="Available on Scale and Enterprise plans">
-  See [Plans](/docs/pricing) for details.
-</Callout>
-
-Long-term historical price data per source. Stores comprehensive prices across BUFF, YouPin, and C5Game, plus a precomputed "aggregate" for overall prices.
-
-Available data range: ~2-3 years, depending on the item. Supports variant items.
-
-<Callout type="info" title="Update Frequency">
-Data updates ~1-2 times per day. For recent data, use [Price History](/docs/api-reference/prices-history) instead.
-</Callout>
+Long-term historical prices per source. Available on Scale and Enterprise plans. Data updates ~1-2 times per day.
 
 **Sources:** `aggregate` (default), `buff`, `youpin`, `c5game`
 
 **Intervals:** `1h` (hourly), `1d` (daily, default)
 
-### Response Fields
-
-Each time bucket contains per-source data:
-
-<TypeTable
-  type={{
-    bucket: {
-      type: "date-time",
-      description: "Start of the time interval",
-    },
-    "<source>.time": {
-      type: "date-time",
-      description: "Actual timestamp of last price in bucket",
-    },
-    "<source>.ask": {
-      type: "number",
-      description: "Lowest ask price (USD)",
-    },
-    "<source>.ask_volume": {
-      type: "integer",
-      description: "Total ask volume",
-    },
-    "<source>.bid": {
-      type: "number",
-      description: "Highest bid price (USD)",
-    },
-    "<source>.bid_volume": {
-      type: "integer",
-      description: "Total bid volume",
-    },
-    "<source>.hourly_volume": {
-      type: "number",
-      description: "Hourly trading volume (aggregate only)",
-    },
-    "<source>.total_supply": {
-      type: "number",
-      description: "Total market supply (aggregate only)",
-    },
-    "<source>.sample_count": {
-      type: "integer",
-      description: "Number of data points in the bucket",
-    },
-  }}
-/>
-
 ---
 
 ## POST /v1/archive/history
 
-Returns long-term archive price history for up to 100 specific items. Available on Scale and Enterprise plans only.
+Returns long-term archive price history for up to 100 specific items. Available data range: ~2-3 years depending on the item. Supports variant items.
 
 ### Headers
 
@@ -333,6 +278,51 @@ curl -X POST "https://api.cs2.sh/v1/archive/history" \ # [!code highlight]
 </Accordions>
 
 For error responses, see [Errors & Limits](/docs/rate-limits).
+
+### Response Fields
+
+Each time bucket contains per-source data:
+
+<TypeTable
+  type={{
+    bucket: {
+      type: "date-time",
+      description: "Start of the time interval",
+    },
+    "<source>.time": {
+      type: "date-time",
+      description: "Actual timestamp of last price in bucket",
+    },
+    "<source>.ask": {
+      type: "number",
+      description: "Lowest ask price (USD)",
+    },
+    "<source>.ask_volume": {
+      type: "integer",
+      description: "Total ask volume",
+    },
+    "<source>.bid": {
+      type: "number",
+      description: "Highest bid price (USD)",
+    },
+    "<source>.bid_volume": {
+      type: "integer",
+      description: "Total bid volume",
+    },
+    "<source>.hourly_volume": {
+      type: "number",
+      description: "Hourly trading volume (aggregate only)",
+    },
+    "<source>.total_supply": {
+      type: "number",
+      description: "Total market supply (aggregate only)",
+    },
+    "<source>.sample_count": {
+      type: "integer",
+      description: "Number of data points in the bucket",
+    },
+  }}
+/>
 
 ---
 

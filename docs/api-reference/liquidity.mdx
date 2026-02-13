@@ -3,41 +3,7 @@ title: Liquidity
 description: Get CS2 item liquidity rankings across marketplaces with the /v1/liquidity endpoint. Find which items and markets trade most actively.
 ---
 
-<Callout type="info" title="Available on Scale and Enterprise plans">
-  See [Plans](/docs/pricing) for details.
-</Callout>
-
-Liquidity rankings (0-100) for items. Higher scores mean the item trades more frequently and is easier to buy/sell.
-
-**Liquidity rank scale:**
-- 95-100: Very high liquidity
-- 85-95: High liquidity
-- 70-85: Moderate liquidity
-- 60-70: Low liquidity
-- Below 60: Very low liquidity
-
-### Response Fields
-
-<TypeTable
-  type={{
-    market_hash_name: {
-      type: "string",
-      description: "Item's standardized name",
-    },
-    liquidity_rank: {
-      type: "number",
-      description: "Liquidity score from 0-100",
-    },
-    updated_at: {
-      type: "date-time",
-      description: "Data updated as of this timestamp",
-    },
-    collected_at: {
-      type: "date-time",
-      description: "Data collected as of this timestamp",
-    },
-  }}
-/>
+Liquidity rankings (0-100) for items. Available on Scale and Enterprise plans. See [Marketplaces](/docs/field-availability#liquidity) for the rank scale.
 
 ---
 
@@ -386,11 +352,37 @@ curl -X POST "https://api.cs2.sh/v1/liquidity" \ # [!code highlight]
 
 For error responses, see [Errors & Limits](/docs/rate-limits).
 
+### Response Fields
+
+<TypeTable
+  type={{
+    market_hash_name: {
+      type: "string",
+      description: "Item's standardized name",
+    },
+    liquidity_rank: {
+      type: "number",
+      description: "Liquidity score from 0-100",
+    },
+    updated_at: {
+      type: "date-time",
+      description: "Data updated as of this timestamp",
+    },
+    collected_at: {
+      type: "date-time",
+      description: "Data collected as of this timestamp",
+    },
+  }}
+/>
+
 ---
 
 <Cards>
   <Card href="/docs/api-reference/prices-latest" title="Latest Prices">
     Get current prices for all or specific items
+  </Card>
+  <Card href="/docs/field-availability" title="Marketplaces">
+    Available data fields by marketplace
   </Card>
   <Card href="/docs/variant-items" title="Variant Items">
     Doppler phases, Case Hardened tiers, and other variants
